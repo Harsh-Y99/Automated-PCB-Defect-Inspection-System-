@@ -1,0 +1,11 @@
+names:
+- mouse_bite
+- spur
+- open_circuit
+- short
+- missing_hole
+- spurious_copper
+nc: 6
+path: /kaggle/working/dummy_dataset
+train: images/train
+val: images/val
