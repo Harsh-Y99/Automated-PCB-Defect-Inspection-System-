@@ -56,17 +56,18 @@ Outputs will be saved in sample_outputs/:
 Annotated images (*.jpg)
 
 defect_analysis.csv containing defect type, confidence, center coordinates, and severity
-
 severity_graph.png visualizing average severity per defect type
 Input Images 
+
 <img src="01_missing_hole_01.jpg" width="400" alt="Annotated PCB Image"> <br> <img src="06_short_06 copy.jpg" width="400" alt="Annotated PCB Image">
+<br>
 Sample Outputs
 Annotated PCB Images
 <img src="01_missing_hole_01 copy.jpg" width="400" alt="Annotated PCB Image"><br> <img src="06_short_06.jpg" width="400" alt="Annotated PCB Image">
 and many more in the folder You can check it 
 <br>
 Severity Graph
-<img src="everity_graph.png" width="600" alt="Severity Graph">
+<img src="severity_graph.png" width="600" alt="Severity Graph">
 
 CSV Data Example
 image	defect_type	confidence	center_x	center_y	severity
