@@ -27,7 +27,7 @@ The system generates:
 - OpenCV, Pandas, Matplotlib  
 
 
-## Quick Setup
+# Quick Setup
 
 bash
 # Create virtual environment
@@ -35,9 +35,6 @@ python3 -m venv venv
 
 # Activate (Linux/Mac)
 source venv/bin/activate
-# Activate (Windows)
-venv\Scripts\activate
-
 # Install dependencies
 pip install --upgrade pip
 pip install torch torchvision opencv-python pandas matplotlib
@@ -62,13 +59,14 @@ defect_analysis.csv containing defect type, confidence, center coordinates, and 
 
 severity_graph.png visualizing average severity per defect type
 Input Images 
-<img src="01_missing_hole_01.jpg" width="400" alt="Annotated PCB Image"> <img src="06_short_06 copy.jpg" width="400" alt="Annotated PCB Image">
+<img src="01_missing_hole_01.jpg" width="400" alt="Annotated PCB Image"> <br> <img src="06_short_06 copy.jpg" width="400" alt="Annotated PCB Image">
 Sample Outputs
 Annotated PCB Images
-<img src="01_missing_hole_01 copy.jpg" width="400" alt="Annotated PCB Image"> <img src="06_short_06.jpg" width="400" alt="Annotated PCB Image">
+<img src="01_missing_hole_01 copy.jpg" width="400" alt="Annotated PCB Image"><br> <img src="06_short_06.jpg" width="400" alt="Annotated PCB Image">
 and many more in the folder You can check it 
+<br>
 Severity Graph
-<img src="sample_outputs/severity_graph.png" width="600" alt="Severity Graph">
+<img src="everity_graph.png" width="600" alt="Severity Graph">
 
 CSV Data Example
 image	defect_type	confidence	center_x	center_y	severity
@@ -77,17 +75,66 @@ image	defect_type	confidence	center_x	center_y	severity
 11_mouse_bite_03.jpg	mouse_bite	0.95	250	200	0.07
 
  Folder Struture
+ <h2>Technical Challenges & Solutions</h2>
+
+<table border="1" cellpadding="8" cellspacing="0" width="100%">
+  <thead style="background-color:#2c3e50; color:white;">
+    <tr>
+      <th>Problem</th>
+      <th>Observation</th>
+      <th>Solution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>YOLO model not found</td>
+      <td>Script couldn’t locate <code>baseline.pt</code></td>
+      <td>Used absolute path to the weights file</td>
+    </tr>
+    <tr>
+      <td>Fallback to default model</td>
+      <td>YOLOv5 loaded default <code>yolov5s</code></td>
+      <td>Used <code>force_reload=True</code> to load custom model</td>
+    </tr>
+    <tr>
+      <td>Slow CPU inference</td>
+      <td>Processing multiple images took longer time</td>
+      <td>Implemented batch processing and optional GPU detection</td>
+    </tr>
+    <tr>
+      <td>PyTorch warnings</td>
+      <td>Deprecated <code>autocast</code> warnings appeared</td>
+      <td>Suppressed warnings using <code>warnings.filterwarnings("ignore")</code></td>
+    </tr>
+    <tr>
+      <td>Defining defect severity</td>
+      <td>No built-in severity metric available</td>
+      <td>Computed normalized bounding box area (0–1 scale)</td>
+    </tr>
+    <tr>
+      <td>Multiple outputs & reports</td>
+      <td>Required CSV reports and performance graphs</td>
+      <td>Integrated Pandas CSV export and Matplotlib graph generation</td>
+    </tr>
+  </tbody>
+</table>
+<style>
+table {
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+th, td {
+  text-align: left;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+
+
+
 
   # Main Program Location is in  Scripts/perfect.py // program to run 
-
-PCB_Defect_Inspection/
-│
-├─ dataset/images/           # PCB input images (defective & defect-free)
-├─ runs/weights/             # baseline.pt model
-├─ sample_outputs/           # Annotated images, CSV, and graphs
-├─ pcb_inspection_baseline.py
-├─ defect_analysis.csv
-└─ README.md
 
 Challenges & Solutions
 Problem	Solution
